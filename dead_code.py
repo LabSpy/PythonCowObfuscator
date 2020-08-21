@@ -127,7 +127,7 @@ def inizialize_dead_code_variables(output):
     Funzione che inizializza le varie funzioni o variabili che sono poi chiamate/usate dai vari DeadCode,
     quindi verrà sempre usata usa volta in tutte le run di offuscamento
     '''
-    dead_code_variables = open('./Trashcode_New/trash_code_Variable.py', 'r')
+    dead_code_variables = open('./dead_code/dead_code_variables.py', 'r')
     # inizializzo le variabili del codice morto
     for line in dead_code_variables: #quindi aggiungo al mio file di output tutto le variabili contenute nei vari dead code
         #indipendentemente da quale andrò ad usare
