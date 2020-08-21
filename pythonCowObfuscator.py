@@ -7,7 +7,7 @@ import sys
 import getopt
 import os #per interaggire con il terminale
 import time #per calcolare il tempo di esecuzione
-import psutil #per la RAM usata (N.B. non usata nel progetto...per un futuro upgrade)
+#import psutil #per la RAM usata (N.B. non usata nel progetto...per un futuro upgrade)
 from staticfg import CFGBuilder
 from fpdf import FPDF
 
