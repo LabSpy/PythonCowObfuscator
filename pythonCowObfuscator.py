@@ -7,7 +7,7 @@ import sys
 import getopt
 import os #per interaggire con il terminale
 import time #per calcolare il tempo di esecuzione
-import psutil #per la RAM usata
+import psutil #per la RAM usata (N.B. non usata nel progetto...per un futuro upgrade)
 from staticfg import CFGBuilder
 from fpdf import FPDF
 
@@ -59,6 +59,7 @@ def main(argv):
     print('...In esecuzione...')
     print('')
     print('')
+    
     # 0) create cfg
     cfg = CFGBuilder().build_from_file('Before_Obfuscate', source)
     a = cfg.build_visual('CFG/1)Before_Obfuscate', format='pdf', calls=True)
@@ -113,8 +114,7 @@ def main(argv):
     # 5.1) create cfg
     cfg = CFGBuilder().build_from_file('After_Replace_Function', './result/obfuscated.py')
     a = cfg.build_visual('CFG/6)After_Replace_Function', format='pdf', calls=True)
-
-
+    
     print('----------------------')
     print('                      ')
     print('    Text Execution    ')
@@ -132,7 +132,6 @@ def main(argv):
     print("Tempo trascorso del file offuscato: %s" % (time.time() - start_time)) 
     print('')
     print('')   
-
 
 if __name__ == '__main__':
     main(sys.argv[1:]) #passiamo la riga di comando eseguita
