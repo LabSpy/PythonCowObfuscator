@@ -3,6 +3,10 @@ import utils
 import re
 import random
 
+__author__ = "Ceoletta Valentina, Zanotti Mattia, Zenari Nicolo"
+__version__ = '1.0'
+__email__ = "{valentina.ceoletta, mattia.zanotti, nicolo.zenari}@studenti.univr.it"
+
 """ A set with varaibles random generates. """
 vars = set()
 """ A list with the new function definition. """
