@@ -1,8 +1,7 @@
 import tokenizer
 from generate_replacement import generate
 import token
-import re
-
+import re #per le ReGeX
 
 __author__ = "Ceoletta Valentina, Zanotti Mattia, Zenari Nicolo"
 __version__ = '1.0'
@@ -33,20 +32,21 @@ replacement_dic = {}
 import_list = []
 
 
-def obfuscate(source):
+def obfuscate(source): #prima funzione chiamata da pythonCowObfuscator()
     """
     Given the source code,it searchs for variables name and replaces them.
 
     :param source: Source file.
     :return: A list of lines.
     """
-    lines = tokenizer.tokenize_file(source)
+    lines = tokenizer.tokenize_file(source) #spezzo le varie line del codice sorgente, che sarà ovviamente il codice
+    #che deriva dal passaggio precedente
     for ind, line in enumerate(lines):
-        for pattern in pattern_search.values():
-            match = re.search(pattern, line)
-            if match:
-                search_variable_to_replace(line)
-    lines = replace(lines)
+        for pattern in pattern_search.values(): #scorro i pattern che desidero trovare con le ReGeX
+            match = re.search(pattern, line) #faccio il match tra line e pattern (ovvero la ReGeX)
+            if match: #se ho il match
+                search_variable_to_replace(line) 
+    lines = replace(lines) #sostituisco le vecchie variabili con quelle nuove, lo fa per tutto il file, quindi per tutte le righe del file
     return (lines, replacement_dic)
 
 
@@ -56,7 +56,8 @@ def search_variable_to_replace(line):
 
     :param line: A single line from tokenizer.tokenize_file(...).
     """
-    token_line = tokenizer.tokenize_line(line)
+    token_line = tokenizer.tokenize_line(line) #spezzo la line
+    #prendo tutti i nomi delle variabili per sostituirli con variabili a caso
     for ind, tok in enumerate(token_line):
         old = ''
         # case 1: (var) or (var,
@@ -111,11 +112,15 @@ def search_variable_to_replace(line):
         elif token_line[ind][1] == 'import' and token_line[ind+1][0] == token.NAME:
             import_list.append(token_line[ind+1][1])
 
-        if old not in replacement_dic.keys() and not old == '':
-            replace = generate()
-            while replace in replacement_dic.values():
-                replace = generate()
-            replacement_dic[old] = replace
+        if old not in replacement_dic.keys() and not old == '': #se old non è già presente nel dizionario di quello che si deve sostituire
+            replace = generate() #genero un nome di una funziomne a caso 
+            
+            # Non seve il controllo se un nuovo nome di variabile esiste o meno, siamo sicuri che sia univoco
+            # per il discorso di probabilità
+            #while replace in replacement_dic.values(): #nel caso in cui creo un nome di una variabile già presente
+            #    replace = generate() #genero un nome di una funziomne a caso
+            
+            replacement_dic[old] = replace #cambio il vecchio nome della funzione con quello nuovo!
 
 
 def replace(lines):
@@ -125,16 +130,17 @@ def replace(lines):
     :param lines: A list of lines.
     :return: A list of modified lines.
     """
-    for index, line in enumerate(lines):
-        if not line == '\n':
-            token_line = tokenizer.tokenize_line(line)
-            for ind, tok in enumerate(token_line):
+    for index, line in enumerate(lines): #guardo tutte le righe
+        if not line == '\n': #se non è una riga da andare a capo e basta
+            token_line = tokenizer.tokenize_line(line) #spezzo la linea
+            for ind, tok in enumerate(token_line): #emumero le porzioni della riga
+                #identifico se le porzioni sono nei dizionari per essere sostituitex 
                 if token_line[ind][1] in replacement_dic.keys() and token_line[ind][1] not in ignore_variable:
                     if ind > 1 and token_line[ind-2][1] in import_list:
                         continue
                     if token_line[ind][0] == token.NAME and token_line[ind+1][1] == '(':
                         continue
-                    token_line[ind][1] = replacement_dic.get(token_line[ind][1])
+                    token_line[ind][1] = replacement_dic.get(token_line[ind][1]) 
 
             lines[index] = tokenizer.untokenize_line(token_line)
-    return lines
+    return lines #lista di linee modificate
