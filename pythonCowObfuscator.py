@@ -11,6 +11,10 @@ import psutil #per la RAM usata (N.B. non usata nel progetto...per un futuro upg
 from staticfg import CFGBuilder
 from fpdf import FPDF
 
+__author__ = "Ceoletta Valentina, Zanotti Mattia, Zenari Nicolo"
+__version__ = '1.0'
+__email__ = "{valentina.ceoletta, mattia.zanotti, nicolo.zenari}@studenti.univr.it"
+
 def main(argv):
 
     if len(argv) == 0: #se non ho passato nulla è un errore
