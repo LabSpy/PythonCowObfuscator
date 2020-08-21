@@ -3,9 +3,9 @@ from generate_replacement import generate
 import token
 import re
 
- __author__ = "Ceoletta Valentina, Zanotti Mattia, Zenari Nicolo"
- __version__ = '1.0'
- __email__ = "{valentina.ceoletta, mattia.zanotti, nicolo.zenari}@studenti.univr.it"
+__author__ = "Ceoletta Valentina, Zanotti Mattia, Zenari Nicolo"
+__version__ = '1.0'
+__email__ = "{valentina.ceoletta, mattia.zanotti, nicolo.zenari}@studenti.univr.it"
 
 """ Dictionary of function to replace """
 replacement_dic = {}
