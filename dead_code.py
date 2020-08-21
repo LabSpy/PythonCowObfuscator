@@ -1,6 +1,10 @@
 import random
 import math
 
+__author__ = "Ceoletta Valentina, Zanotti Mattia, Zenari Nicolo"
+__version__ = '1.0'
+__email__ = "{valentina.ceoletta, mattia.zanotti, nicolo.zenari}@studenti.univr.it"
+
 candidate_lines = ['while', 'for', 'def', 'if ']
 
 def start(source_path):
