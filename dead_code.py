@@ -112,7 +112,7 @@ def insert_dead_code(output):
     choice = random.randint(1,10) #quante volte fa l'inseriemnto di DeadCode
     for i in range(1,choice):
         
-        ran = random.randint(0, 20) #scelta di uno dei file di DeadCode
+        ran = random.randint(1, 21) #scelta di uno dei file di DeadCode
         dead_code = open('./dead_code/dead_code_' + str(ran) + '.py', 'r')
 
         # inserisce il file dead_code_x.py nel file output.py
