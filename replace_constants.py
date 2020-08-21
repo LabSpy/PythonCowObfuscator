@@ -3,11 +3,6 @@ import utils
 import re
 import random
 
-
-__author__ = "Ceoletta Valentina, Zanotti Mattia, Zenari Nicolo"
-__version__ = '1.0'
-__email__ = "{valentina.ceoletta, mattia.zanotti, nicolo.zenari}@studenti.univr.it"
-
 """ A set with varaibles random generates. """
 vars = set()
 """ A list with the new function definition. """
@@ -21,9 +16,13 @@ def replace_constants(source):
     :param source: File path
     :return: A list of lines
     """
+    #appplico ad ogni riga il tokenizzatore, quindi lines un vettore di stringhe
     lines = tokenizer.tokenize_file(source)
+    #applico poi il cambio di variabile ad ogni riga
     lines = replace_constant_var_num(lines)
+    #applico il cambio del nome delle variabili del while
     lines = replace_constant_while(lines)
+    #applico il cambio del nome delle variabili del for
     lines = replace_constant_for(lines)
 
     pattern = 'import\s+\w+\s*'
